@@ -4,7 +4,5 @@ Rust traits to control a 4 wire stepper motor. I also provide an example for how
 
 
 
-
-
 ## Engineers 
 Babuabel Wanyeki (bwanyeki12@gmail.com)
