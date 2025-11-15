@@ -17,32 +17,12 @@ esp-hal = { version = "0.23.0", features = ["esp32c3"] }
 esp-println = { version = "0.12.0", features = ["esp32c3", "log"] }
 log = { version = "0.4.21" }
 esp-alloc = { version = "0.6.0" }
-embedded-io = "0.6.1"
-embedded-io-async = "0.6.1"
-
-
-heapless = { version = "0.8.0", default-features = false, features = [
-    "portable-atomic",
-] }
 
 # Read more about why we need a bigger task areana here: https://docs.embassy.dev/embassy-executor/git/cortex-m/index.html#task-arena
 embassy-executor = { version = "0.7.0", features = ["task-arena-size-81920"] }
 embassy-time = { version = "^0.4", features = ["generic-queue-8"] }
 esp-hal-embassy = { version = "^0.6.0", features = ["esp32c3"] }
 static_cell = { version = "2.1.0" }
-cfg-if = "1.0.0"
-crypto-bigint = { version = "0.5.5", default-features = false }
-embedded-test = { version = "0.5.0", default-features = false }
-embassy-sync = "0.6.1"
-critical-section = { version = "1.0.1", optional = true }
-futures = { version = "0.3", default-features = false }
-embassy-futures = "0.1.1"
-
-esp-storage = { version = "0.4.0", features = ["esp32c3"] }
-embedded-storage = "0.3.1"
-const_for = "0.1.5"
-embedded-hal = "1.0.0"
-embedded-hal-async = "1.0.0"
 
 thiserror-no-std = "2.0.2"
 
