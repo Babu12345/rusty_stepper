@@ -1,8 +1,8 @@
 # my_workspace/Cargo.toml
 [workspace]
-exclude = []
+exclude = ["examples/esp32c3-example"]
 resolver = "2"
-members = [ "channel","stepper"]
+members = ["stepper"]
 
 
 [workspace.package]
@@ -16,5 +16,13 @@ rust-version = "1.77"
 debug = true
 
 [profile.release]
-debug = false
-opt-level = "s"
+# debug = false
+# opt-level = "s"
+
+codegen-units = 1        # LLVM can perform better optimizations using a single thread
+debug = 0                # Switch to 0 decrease debug size in production code which is considerable. 2 is the default.
+debug-assertions = false
+incremental = false
+lto = 'fat'
+opt-level = 's'
+overflow-checks = false

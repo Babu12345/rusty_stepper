@@ -1,0 +1,68 @@
+[package]
+name = "esp32c3-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+stepper = { path = "../../stepper"}
+
+esp-backtrace = { version = "0.14.2", features = [
+    "esp32c3",
+    "exception-handler",
+    "panic-handler",
+    "println",
+] }
+
+esp-hal = { version = "0.23.0", features = ["esp32c3"] }
+esp-println = { version = "0.12.0", features = ["esp32c3", "log"] }
+log = { version = "0.4.21" }
+esp-alloc = { version = "0.6.0" }
+embedded-io = "0.6.1"
+embedded-io-async = "0.6.1"
+
+
+heapless = { version = "0.8.0", default-features = false, features = [
+    "portable-atomic",
+] }
+
+# Read more about why we need a bigger task areana here: https://docs.embassy.dev/embassy-executor/git/cortex-m/index.html#task-arena
+embassy-executor = { version = "0.7.0", features = ["task-arena-size-81920"] }
+embassy-time = { version = "^0.4", features = ["generic-queue-8"] }
+esp-hal-embassy = { version = "^0.6.0", features = ["esp32c3"] }
+static_cell = { version = "2.1.0" }
+cfg-if = "1.0.0"
+crypto-bigint = { version = "0.5.5", default-features = false }
+embedded-test = { version = "0.5.0", default-features = false }
+embassy-sync = "0.6.1"
+critical-section = { version = "1.0.1", optional = true }
+futures = { version = "0.3", default-features = false }
+embassy-futures = "0.1.1"
+
+esp-storage = { version = "0.4.0", features = ["esp32c3"] }
+embedded-storage = "0.3.1"
+const_for = "0.1.5"
+embedded-hal = "1.0.0"
+embedded-hal-async = "1.0.0"
+
+
+# Plugin integration crates
+
+device-embassy-jtag = { git = "ssh://git@github.com/Babu12345/ble-plugin.git", default-features = false }
+protocol = { git = "ssh://git@github.com/Babu12345/ble-plugin.git", default-features = false, features = [
+    "quick_protocol_buffer",
+] }
+thiserror-no-std = "2.0.2"
+
+[profile.dev]
+# Rust debug is too slow.
+# For debug builds always builds with some optimization
+opt-level = "s"
+
+[profile.release]
+codegen-units = 1        # LLVM can perform better optimizations using a single thread
+debug = 0                # Switch to 0 decrease debug size in production code which is considerable. 2 is the default.
+debug-assertions = false
+incremental = false
+lto = 'fat'
+opt-level = 's'
+overflow-checks = false
