@@ -44,13 +44,6 @@ const_for = "0.1.5"
 embedded-hal = "1.0.0"
 embedded-hal-async = "1.0.0"
 
-
-# Plugin integration crates
-
-device-embassy-jtag = { git = "ssh://git@github.com/Babu12345/ble-plugin.git", default-features = false }
-protocol = { git = "ssh://git@github.com/Babu12345/ble-plugin.git", default-features = false, features = [
-    "quick_protocol_buffer",
-] }
 thiserror-no-std = "2.0.2"
 
 [profile.dev]
