@@ -3,6 +3,7 @@
 
 use embassy_executor::Spawner;
 
+use embassy_time::Duration;
 use esp32c3_example::{
     config::{
         initalize_logger, initialize_peripherals,
@@ -53,7 +54,7 @@ async fn main(_spawner: Spawner) {
 
     log::info!("Timer frequency configured");
 
-    let _stepper = configure_stepper(
+    let stepper = configure_stepper(
         ledc,
         lstimer0,
         peripherals.GPIO4,
@@ -64,4 +65,19 @@ async fn main(_spawner: Spawner) {
     .unwrap();
 
     log::info!("Stepper motor configured");
+
+    log::info!("Stepper motor driving CW for 5 Seconds");
+    stepper
+        .drive_for(stepper::stepper::DIRECTION::CW, Duration::from_secs(5))
+        .await
+        .ok();
+
+    log::info!("Stepper motor driving CCW for 5 Seconds");
+    stepper
+        .drive_for(stepper::stepper::DIRECTION::CCW, Duration::from_secs(5))
+        .await
+        .ok();
+
+    log::info!("Stop the stepper motor");
+    stepper.drive(stepper::stepper::DIRECTION::OFF).ok();
 }
